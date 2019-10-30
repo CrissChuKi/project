@@ -51,9 +51,9 @@ string get_number(void)    //Get a valid number from user input
     {
         i = get_string("Number: ");
         n = strlen(i);
-        for (int j = 0; j<n;j++)    //Check if a letter was in the number, is so put the count down
+        for (int j = 0; j<n;j++)    //Check if a letter was in the number, if so put the count down
         {
-            if(isalpha(i[j]) || ispunct(i[j]) || isspace(i[j]))
+            if(isdigit(i[j]) == false)
             {
                 c--;
             }
@@ -73,23 +73,23 @@ char if_valid(string b, string number, int array, int mul, int add)    //Check t
     int d = 0;    //Start count for multiplication
     int e = 0;    //Start count for addition
     char f;        //return from the function valid or not
-    for (int i = mul; i < array; i = i+2)
+    for (int i = mul; i < array; i = i+2) //multiply by 2 each 2 digit from second last
     {
         int c = (number[i]-48)*2;    //Get the number
         if(c > 9)
         {
-            e = e + ((c%10)+1);
+            e = e + ((c%10)+1); //if the number is over 9, mod it by 10 and add it to the count+1
         }
         else
         {
-            e = e+c;
+            e = e+c; //else add the number to the count
         }
     }
     for (int i = add; i < array; i = i+2)
     {
-        d = (d + number[i])-48;    //addition each x digit from number starting from second last
+        d = (d + number[i])-48;    //addition each x digit from number starting from last
     }
-    if(((e+d)%10) == 0)
+    if((e+d)%10 == 0)
     {
         f = printf("%s", b); //print the card name
     }
