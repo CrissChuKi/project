@@ -64,22 +64,25 @@ string get_number(void)    //Get a valid number from user input
 
 char Not_valid(void)    //Prompt that the card is not valid
 {
-    char i = printf("Not valid\n");
+    char i = printf("INVALID\n");
     return i;
 }
 
 char if_valid(string b, string number, int array, int mul, int add)    //Check the validity of the card with card name,
 {                                                                      //right number array, modifier for * and +
-    string c ="0";  //trying to convert the number into string ex: 12, extract the 1 and add it to 2
     int d = 0;    //Start count for multiplication
     int e = 0;    //Start count for addition
     char f;        //return from the function valid or not
     for (int i = mul; i < array; i = i+2)
     {
-        sprintf(result, "%i", (number[i]-48)*2);    //trying to extract each digit from the new number 
-        for(int j = 0, n = strlen(c); j < n; j++)   //multiplication and add the two ex : 12, convert to 1 + 2
+        int c = (number[i]-48)*2;    //Get the number
+        if(c > 9)
         {
-            e = (e + c[j]);
+            e = e + ((c%10)+1);
+        }
+        else
+        {
+            e = e+c;
         }
     }
     for (int i = add; i < array; i = i+2)
@@ -88,7 +91,7 @@ char if_valid(string b, string number, int array, int mul, int add)    //Check t
     }
     if(((e+d)%10) == 0)
     {
-        f = printf("%s\n", b); //print the card name
+        f = printf("%s", b); //print the card name
     }
     else
     {
